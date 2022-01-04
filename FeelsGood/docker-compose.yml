@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  animalselector:
+    image: ${DOCKER_REGISTRY-}animalselector
+    ports:
+      - "8080:80"
+      - "8081:443"
+    build:
+      context: .
+      dockerfile: AnimalSelector/Dockerfile
