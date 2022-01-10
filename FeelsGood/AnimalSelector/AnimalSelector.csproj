@@ -2,11 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>87e0c03d-2b65-4b2a-9e9a-a7283f241529</UserSecretsId>
+    <UserSecretsId>AnimalSlector-68b544cc-e23f-4cb1-bf1f-cda6a2311326</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 

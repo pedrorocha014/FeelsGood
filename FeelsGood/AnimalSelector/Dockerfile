@@ -1,7 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
 # Copy csproj and restore as distinct layers
 COPY *.csproj ./
