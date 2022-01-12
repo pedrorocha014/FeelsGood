@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.Text.Json;
+using AnimalSelector.Data;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 
@@ -34,9 +35,9 @@ namespace AnimalSelector.AsyncDataService{
             }
         }
 
-        public void PublishAnimalsRequest()
+        public void PublishAnimalsRequest(ImageRequestDto imageRequest)
         {
-            var message = JsonSerializer.Serialize("");
+            var message = JsonSerializer.Serialize(imageRequest);
 
             if(_connection.IsOpen){
                 Console.WriteLine($"--> RabbitMQ Connection Open, sending message...");

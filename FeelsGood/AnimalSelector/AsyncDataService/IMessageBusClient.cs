@@ -1,5 +1,7 @@
+using AnimalSelector.Data;
+
 namespace AnimalSelector.AsyncDataService{
     public interface IMessageBusClient{
-        void PublishAnimalsRequest();
+        void PublishAnimalsRequest(ImageRequestDto imageRequest);
     }
 }

@@ -30,6 +30,11 @@ static_resources:
                 route:
                   prefix_rewrite: "/WeatherForecast"
                   cluster: animal_service
+              - match:
+                  prefix: "/animals"
+                route:
+                  prefix_rewrite: "/Images"
+                  cluster: animal_service
           http_filters:
           - name: envoy.filters.http.router
   - name: listener_1
@@ -54,6 +59,11 @@ static_resources:
                   prefix: "/a"
                 route:
                   prefix_rewrite: "/WeatherForecast"
+                  cluster: secure_animal_service
+              - match:
+                  prefix: "/animals"
+                route:
+                  prefix_rewrite: "/Images"
                   cluster: secure_animal_service
           http_filters:
           - name: envoy.filters.http.router
