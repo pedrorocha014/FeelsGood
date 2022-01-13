@@ -6,6 +6,7 @@ using AnimalSelector.Data;
 using AnimalSelector.AsyncDataService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace AnimalSelector.Controllers
 {
@@ -25,9 +26,11 @@ namespace AnimalSelector.Controllers
         [HttpPost("single")]
         public IActionResult CallSingleImage([FromBody] ImageRequestDto imageRequest)
         {
-            _messageBus.PublishAnimalsRequest(imageRequest);
+            string response = _messageBus.PublishAnimalsRequest(imageRequest);
 
-            return Ok();
+            ImagesDto imagesDto = JsonConvert.DeserializeObject<ImagesDto>(response);
+
+            return Ok(imagesDto);
         }
     }
 }
