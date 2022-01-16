@@ -16,19 +16,35 @@ namespace AnimalSelector.Controllers
     {
         private readonly ILogger<ImagesController> _logger;
         private readonly IMessageBusClient _messageBus;
+        private readonly IHttpClientService _httpClient;
 
-        public ImagesController(ILogger<ImagesController> logger, IMessageBusClient messageBus)
+        public ImagesController(ILogger<ImagesController> logger, IMessageBusClient messageBus, IHttpClientService httpClient)
         {
             _logger = logger;
             _messageBus = messageBus;
+            _httpClient = httpClient;
         }
 
         [HttpPost("single")]
-        public IActionResult CallSingleImage([FromBody] ImageRequestDto imageRequest)
+        public async Task<IActionResult> CallSingleImage([FromBody] ImageRequestDto imageRequest)
         {
-            string response = _messageBus.PublishAnimalsRequest(imageRequest);
+            string responseString = "";
+            ImagesDto imagesDto = new ImagesDto();
 
-            ImagesDto imagesDto = JsonConvert.DeserializeObject<ImagesDto>(response);
+            switch (imageRequest.animal)
+            {
+                case "dog":
+                    responseString = await _httpClient.GetSingleDog();
+                    DogDto dogImageDto = JsonConvert.DeserializeObject<DogDto>(responseString);
+                    imagesDto.link = dogImageDto.message;
+                break;
+
+                case "cat":
+                    responseString = await _httpClient.GetSingleCat();
+                    CatDto catImageDto = JsonConvert.DeserializeObject<CatDto>(responseString);
+                    imagesDto.link = catImageDto.url;
+                break;
+            }
 
             return Ok(imagesDto);
         }

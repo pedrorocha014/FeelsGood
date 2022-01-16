@@ -26,11 +26,6 @@ static_resources:
               domains: ["*"]
               routes:
               - match:
-                  prefix: "/a"
-                route:
-                  prefix_rewrite: "/WeatherForecast"
-                  cluster: animal_service
-              - match:
                   prefix: "/animals"
                 route:
                   prefix_rewrite: "/Images"
@@ -55,11 +50,6 @@ static_resources:
             - name: local_service
               domains: ["*"]
               routes:
-              - match:
-                  prefix: "/a"
-                route:
-                  prefix_rewrite: "/WeatherForecast"
-                  cluster: secure_animal_service
               - match:
                   prefix: "/animals"
                 route:
